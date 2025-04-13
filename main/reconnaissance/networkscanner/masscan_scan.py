@@ -1,6 +1,6 @@
 # masscan_scan.py
 import subprocess
-from networkscanner.utils import run_tool
+from .utils import run_tool
 
 def masscan_scan(target):
     """Run Masscan scan."""
