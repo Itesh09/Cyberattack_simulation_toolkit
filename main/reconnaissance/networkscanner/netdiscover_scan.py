@@ -1,5 +1,5 @@
 # netdiscover_scan.py
-from networkscanner.utils import run_tool
+from .utils import run_tool
 
 def netdiscover_scan(ip_range):
     """Run Netdiscover scan."""
