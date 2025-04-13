@@ -1,5 +1,5 @@
 # amass_scan.py
-from NetworkScanner.utils import run_tool
+from .utils import run_tool
 
 def amass_scan(domain):
     """Run Amass scan."""
