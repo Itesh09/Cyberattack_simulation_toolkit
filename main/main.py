@@ -19,18 +19,18 @@ import Web_Apps.xss as xss
 import Web_Apps.sql as sqli
 import Web_Apps.csrf as csrf
 import Web_Apps.file_inclusion as lfi
-from Exploitation import  vulnerability_scanner_menu
-from Exploitation import network_exploits
+from Exploitation.vulnerability_scanner import nmap_vuln_scan
+from Exploitation.vulnerability_scanner import searchsploit_exploits
+from Exploitation.vulnerability_scanner import nikto_scan
+from Exploitation.vulnerability_scanner import wpscan_scan
+from Exploitation.network_exploits import *
+from Exploitation.reverse_shells import *
+from Exploitation.vulnerability_scanner import *
 from Network_Attack_Tools import network_attacks_menu
-
 from wireless import wireless_menu
 from Social_enginering_Simulation import social_engineering_menu
 
-'''def exploitation_menu():
-    """Main Exploitation menu."""
-    while True:
-       network_exploits
-'''
+
 
 
 # Banner
@@ -275,7 +275,75 @@ def web_attack_menu():
         input("\nPress Enter to continue...") 
 
 
+def vulnerability_scanner_menu():
+    """Vulnerability Scanner submenu."""
+    while True:
+        print("\n=== Vulnerability Scanner ===")
+        print("1) Nmap Vulnerability Scan (NSE)")
+        print("2) Searchsploit (Find Exploits)")
+        print("3) Nikto (Web Server Scanner)")
+        print("4) WPScan (WordPress Scanner)")
+        print("5) Back to Main Menu")
+        choice = input("Select an option: ")
 
+        if choice == "1":
+            target = input("Enter target IP/hostname: ")
+            nmap_vuln_scan(target)
+        elif choice == "2":
+            query = input("Enter search query (e.g., 'Apache 2.4.49'): ")
+            searchsploit_exploits(query)
+        elif choice == "3":
+            target = input("Enter target URL (e.g., http://example.com): ")
+            nikto_scan(target)
+        elif choice == "4":
+            target = input("Enter WordPress site URL (e.g., http://example.com): ")
+            wpscan_scan(target)
+        elif choice == "5":
+            break
+        else:
+            print("[-] Invalid option. Try again.")
+        sleep(1)  # Pause for readability
+
+def network_exploits_menu():
+    """Network Exploits submenu."""
+    while True:
+        print("\n=== Network Exploits ===")
+        print("1) Exploit SMB (e.g., EternalBlue)")
+        print("2) SSH Bruteforce")
+        print("3) Exploit RDP (e.g., BlueKeep)")
+        print("4) Metasploit (Custom Exploit)")
+        print("5) Reverse shell")
+        print("6)  Common vulnerabilities")
+        print("7) Back to Main Menu")
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            target = input("Enter target IP: ")
+            exploit_smb(target)
+        elif choice == "2":
+            target = input("Enter target IP: ")
+            username = input("Enter username: ")
+            wordlist = input("Enter wordlist path: ")
+            ssh_bruteforce(target, username, wordlist)
+        elif choice == "3":
+            target = input("Enter target IP: ")
+            exploit_rdp(target)
+        elif choice == "4":
+            target = input("Enter target IP: ")
+            exploit_path = input("Enter Metasploit exploit path (e.g., exploit/windows/smb/...): ")
+            metasploit_exploit(target, exploit_path)
+        elif choice == "5":
+            reverse_shells_menu()
+        
+        elif choice == "6":
+            vulnerability_scanner_menu()
+
+        elif choice == "7":
+            break
+        else:
+
+            print("[-] Invalid option. Try again.")
+        sleep(1)  # Pause for readability
 def main_menu():
     """Main menu for the toolkit."""
     while True:
@@ -288,7 +356,7 @@ def main_menu():
         elif choice == "2":
             reconnaissance()
         elif choice == "3":
-           network_exploits
+           vulnerability_scanner_menu()
         elif choice == "4":
             password_cracking_menu()
             
